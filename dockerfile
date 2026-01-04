@@ -30,9 +30,8 @@ COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 8080
 
 # Start Supervisor (runs both Nginx + PHP-FPM)
-CMD ["/usr/bin/supervisord", "-n"]
+CMD ["/usr/bin/supervisord", "-n"],["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 RUN php artisan config:clear \
     && php artisan config:cache
 
-RUN php artisan migrate --force || true
