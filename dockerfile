@@ -31,3 +31,8 @@ EXPOSE 8080
 
 # Start Supervisor (runs both Nginx + PHP-FPM)
 CMD ["/usr/bin/supervisord", "-n"]
+
+RUN php artisan config:clear \
+    && php artisan config:cache
+
+RUN php artisan migrate --force || true
