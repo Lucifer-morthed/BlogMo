@@ -36,9 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/posts/{id}', [BlogController::class, 'updatePost'])->name('post.update');
     Route::delete('/posts/{id}', [BlogController::class, 'deletePost'])->name('post.delete');
 
-    // Comment routes
-    Route::post('/comments', [BlogController::class, 'storeComment'])->name('comments.store');
-
+    // Comment routes - handled in API routes
     // Admin routes (require admin role)
     Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
         Route::get('/', [\App\Http\Controllers\Web\AdminController::class, 'index'])->name('index');
