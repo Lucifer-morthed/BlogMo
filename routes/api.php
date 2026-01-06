@@ -46,7 +46,9 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('categories', CategoryController::class)->except(['index', 'show']);
 
         // Comment management
-        Route::apiResource('comments', CommentController::class)->except(['index']);
+        Route::post('comments', [CommentController::class, 'store'])->name('api.comments.store');
+        Route::put('comments/{comment}', [CommentController::class, 'update'])->name('api.comments.update');
+        Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('api.comments.destroy');
 
         // Admin routes
         Route::prefix('admin')->middleware('admin')->group(function () {
