@@ -26,11 +26,11 @@ RUN php artisan config:clear && \
 COPY ./docker/nginx.conf /etc/nginx/sites-enabled/default
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Expose port 8080 (Render uses $PORT)
-EXPOSE 8080
+# Expose port 80
+EXPOSE 80
 
 # Start Supervisor (runs both Nginx + PHP-FPM)
-CMD ["/usr/bin/supervisord", "-n"],["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 RUN php artisan config:clear \
     && php artisan config:cache
